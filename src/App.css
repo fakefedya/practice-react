@@ -1,0 +1,16 @@
+body {
+	width: 100%;
+	min-height: 100vh;
+	margin: 0;
+	background: var(--Grey-900, #121829);
+	font-family: 'Poppins', sans-serif;
+}
+
+.app {
+	max-width: 1440px;
+	width: 100%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 80px;
+}
