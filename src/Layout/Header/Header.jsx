@@ -7,7 +7,7 @@ function Header() {
 		<header className='header'>
 			<div className='header__container'>
 				<Logo />
-				<Navbar />
+				<Navbar movieCount={2} />
 			</div>
 		</header>
 	)
