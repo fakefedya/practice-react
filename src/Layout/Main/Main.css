@@ -6,7 +6,7 @@
 
 .main__container {
 	display: flex;
+	flex-direction: column;
+	gap: 80px;
 	padding: 0 120px;
-	justify-content: space-between;
-	align-items: center;
 }
