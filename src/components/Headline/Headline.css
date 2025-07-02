@@ -1,0 +1,31 @@
+.headline {
+	max-width: 588px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.headline__subheading {
+	font-size: 16px;
+}
+
+.headline__search-button {
+	width: fit-content;
+	border-radius: 12px;
+	color: var(--White-100, #fff);
+	border: 2px solid var(--Primary-400, #7b6ef6);
+	background: var(--Primary-400, #7b6ef6);
+	transition: 0.3s opacity ease-in-out;
+}
+
+.headline__search-button:hover {
+	opacity: 0.8;
+}
+
+.headline__action {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}

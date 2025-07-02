@@ -14,3 +14,29 @@ body {
 	flex-direction: column;
 	gap: 80px;
 }
+
+h1 {
+	color: var(--Grey-50, #ebeef5);
+	font-size: 64px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 80px;
+	letter-spacing: -1.28px;
+	margin: 0;
+}
+
+p {
+	margin: 0;
+}
+
+input {
+	border: none;
+	background-image: none;
+	background-color: transparent;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	outline: none;
+	font-size: 14px;
+	width: 100%;
+}

@@ -9,18 +9,6 @@
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 400;
-	line-height: 24px;
+	line-height: 20px;
 	cursor: pointer;
-}
-
-.button.search-button {
-	border-radius: 12px;
-	color: var(--White-100, #fff);
-	border: 2px solid var(--Primary-400, #7b6ef6);
-	background: var(--Primary-400, #7b6ef6);
-	transition: 0.3s opacity ease-in-out;
-}
-
-.button.search-button:hover {
-	opacity: 0.8;
 }
