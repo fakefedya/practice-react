@@ -1,12 +1,13 @@
 import MovieCard from '../MovieCard/MovieCard'
-import './MovieList.css'
+import styles from './MovieList.module.css'
+import cn from 'classnames'
 
 function MovieList({ movieList }) {
 	if (movieList.length === 0) {
 		return <p>Фильмы отсутствуют</p>
 	}
 	return (
-		<div className='movie__list'>
+		<div className={cn(styles.grid)}>
 			{movieList.map((el) => (
 				<MovieCard
 					key={el.key}

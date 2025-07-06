@@ -1,9 +1,12 @@
-import './Paragraph.css'
+import styles from './Paragraph.module.css'
+import cn from 'classnames'
 
 function Paragraph({ paragraphText, className }) {
-	const paragraphClassName = 'paragraph' + (className ? ' ' + className : '')
-
-	return <p className={paragraphClassName}>{paragraphText}</p>
+	return (
+		<p className={cn(styles['paragraph'], styles[className])}>
+			{paragraphText}
+		</p>
+	)
 }
 
 export default Paragraph

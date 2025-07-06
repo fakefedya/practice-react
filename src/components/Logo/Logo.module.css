@@ -1,9 +1,9 @@
-.header__logo {
+.header-logo {
 	height: 40px;
 	width: 40px;
 }
 
-.header__logo-link {
+.logo-link {
 	height: 100%;
 	width: 100%;
 	display: flex;
@@ -12,11 +12,11 @@
 	transition: 0.3s opacity ease-in-out;
 }
 
-.header__logo-link:hover {
+.logo-link:hover {
 	opacity: 0.8;
 }
 
-.header__logo-image {
+.logo-icon {
 	max-width: 100%;
 	max-height: 100%;
 }

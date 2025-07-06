@@ -64,22 +64,19 @@ function App() {
 			<Header />
 			<Main>
 				<Headline>
-					<h1 className='headline__heading'>Поиск</h1>
+					<h1>Поиск</h1>
 					<Paragraph
 						paragraphText={
 							'Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
 						}
-						className={'headline__subheading'}
+						className={'subheading'}
 					/>
 					<div className='headline__action'>
 						<Search
-							className={'headline__action-input'}
+							className={'headline-input'}
 							placeholder={'Введите название'}
 						/>
-						<Button
-							buttonText={'Искать'}
-							className={'headline__search-button'}
-						/>
+						<Button buttonText={'Искать'} className={'search-button'} />
 					</div>
 				</Headline>
 				<MovieList movieList={MOVIE_LIST} />

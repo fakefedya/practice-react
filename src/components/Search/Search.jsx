@@ -1,28 +1,25 @@
-import './Search.css'
+import styles from './Search.module.css'
+import cn from 'classnames'
 
 function Search({ className, placeholder }) {
-	const inputClassName = 'input' + (className ? ' ' + className : '')
-
-	if (className === 'headline__action-input') {
-		return (
-			<div className='input__wrapper'>
-				<img
-					className='input__wrapper-search-icon'
-					src='/public/icons/search.svg'
-					alt='Иконка поиска'
-				/>
-				<input
-					className={inputClassName}
-					type='text'
-					placeholder={placeholder}
-				/>
-			</div>
-		)
-	}
+	const isHeadlineInput = className === 'headline-input'
 
 	return (
-		<div className='input__wrapper'>
-			<input className={inputClassName} type='text' placeholder={placeholder} />
+		<div className={cn(styles['input-wrapper'], className)}>
+			{isHeadlineInput && (
+				<img
+					className={styles['input-icon']}
+					src='/icons/search.svg'
+					alt='Иконка поиска'
+				/>
+			)}
+			<input
+				className={cn(styles.input, {
+					[styles['headline-input']]: isHeadlineInput,
+				})}
+				type='text'
+				placeholder={placeholder}
+			/>
 		</div>
 	)
 }

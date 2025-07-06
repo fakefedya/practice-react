@@ -1,4 +1,5 @@
-import './Navbar.css'
+import styles from './Navbar.module.css'
+import cn from 'classnames'
 
 function Navbar({ movieCount }) {
 	const NAVIGATION_LINKS = [
@@ -20,21 +21,17 @@ function Navbar({ movieCount }) {
 	]
 
 	const navItem = NAVIGATION_LINKS.map((link) => (
-		<li className='header__nav-item' key={link.id}>
-			<a className='header__nav-item-link' href={link.href}>
+		<li className={cn(styles['nav-item'])} key={link.id}>
+			<a className={cn(styles['item-link'])} href={link.href}>
 				{link.id === 2 ? (
 					<>
 						{link.text}
-						<span className='nav__item-link-badge'>{movieCount}</span>
+						<span className={cn(styles['link-badge'])}>{movieCount}</span>
 					</>
 				) : link.id === 3 ? (
 					<>
 						{link.text}
-						<img
-							className='nav__item-link-image'
-							src='/public/icons/login.svg'
-							alt='Иконка логина'
-						/>
+						<img src='/public/icons/login.svg' alt='Иконка логина' />
 					</>
 				) : (
 					link.text
@@ -44,8 +41,8 @@ function Navbar({ movieCount }) {
 	))
 
 	return (
-		<nav className='header__nav'>
-			<ul className='header__nav-list'>{navItem}</ul>
+		<nav>
+			<ul className={cn(styles['nav-list'])}>{navItem}</ul>
 		</nav>
 	)
 }

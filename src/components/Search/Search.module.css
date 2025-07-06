@@ -1,4 +1,4 @@
-.input__wrapper {
+.input-wrapper {
 	position: relative;
 	width: 100%;
 	max-width: 352px;
@@ -11,23 +11,18 @@
 	background: var(--Black-10, rgba(0, 0, 0, 0.1));
 }
 
-.input__wrapper input {
-	height: 26px;
-	padding: 15px 16px;
-}
-
-.input__wrapper .headline__action-input {
+.headline-input {
 	height: 26px;
 	padding: 15px 16px 15px 56px;
 }
 
-.input__wrapper-search-icon {
+.input-icon {
 	pointer-events: none;
 	position: absolute;
 	left: 16px;
 }
 
-.headline__search-button::placeholder {
+.headline-input::placeholder {
 	color: #475069;
 	font-size: 14px;
 	font-style: normal;
