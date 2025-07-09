@@ -1,11 +1,15 @@
 import './App.css'
+import styles from '../src/components/Button/Button.module.css'
+
 import Header from './Layout/Header/Header'
 import Main from './Layout/Main/Main'
 import Headline from './components/Headline/Headline'
 import Paragraph from './components/Paragraph/Paragraph'
 import Button from './components/Button/Button'
-import Search from './components/Search/Search'
+import Input from './components/Input/Input'
 import MovieList from './components/MovieList/MovieList'
+import Section from './components/Section/Section'
+import AuthForm from './components/AuthForm/AuthForm'
 
 function App() {
 	const MOVIE_LIST = [
@@ -59,27 +63,38 @@ function App() {
 		},
 	]
 
+	const handleAuthSubmit = () => {
+		console.log('Вызов из компонента App')
+	}
+
 	return (
 		<div className='app'>
 			<Header />
 			<Main>
-				<Headline>
-					<h1>Поиск</h1>
-					<Paragraph
-						paragraphText={
-							'Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
-						}
-						className={'subheading'}
-					/>
-					<div className='headline__action'>
-						<Search
-							className={'headline-input'}
-							placeholder={'Введите название'}
+				<Section>
+					<AuthForm onSubmit={handleAuthSubmit} />
+				</Section>
+				<Section>
+					<Headline>
+						<h1>Поиск</h1>
+						<Paragraph
+							paragraphText={
+								'Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
+							}
+							className={'subheading'}
 						/>
-						<Button buttonText={'Искать'} className={'search-button'} />
-					</div>
-				</Headline>
-				<MovieList movieList={MOVIE_LIST} />
+						<div className='headline__action'>
+							<Input
+								className={'headline-input'}
+								placeholder={'Введите название'}
+							/>
+							<Button text={'Искать'} className={styles['search-button']} />
+						</div>
+					</Headline>
+				</Section>
+				<Section>
+					<MovieList movieList={MOVIE_LIST} />
+				</Section>
 			</Main>
 		</div>
 	)

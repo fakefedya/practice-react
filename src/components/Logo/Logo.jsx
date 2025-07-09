@@ -1,12 +1,12 @@
-import style from './Logo.module.css'
+import styles from './Logo.module.css'
 import cn from 'classnames'
 
 function Logo() {
 	return (
-		<div className={cn(style['header-logo'])}>
-			<a className={cn(style['logo-link'])} href='/'>
+		<div className={cn(styles['header-logo'])}>
+			<a className={cn(styles['logo-link'])} href='/'>
 				<img
-					className={cn(style['logo-icon'])}
+					className={cn(styles['logo-icon'])}
 					src='/icons/logo.svg'
 					alt='Изображение лого'
 				/>
