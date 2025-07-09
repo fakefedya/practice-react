@@ -3,9 +3,11 @@ import Button from '../Button/Button'
 import Input from '../Input/Input'
 import styles from './AuthForm.module.css'
 import { INITIAL_STATE, formReducer } from './AuthForm.state'
-// import cn from 'classnames'
+import { useLocalStorage } from '../../hooks/use-localstorage.hook.js'
 
-function AuthForm() {
+function AuthForm({ onSubmit }) {
+	const [users, setUsers] = useLocalStorage('reactProjectUsers')
+
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
 	const { isValid, values, isFormReadyToSubmit } = formState
 
@@ -14,7 +16,6 @@ function AuthForm() {
 		if (!isValid.name) {
 			timerId = setTimeout(() => {
 				dispatchForm({ type: 'RESET_VALIDITY' })
-				console.log('Очистка состояния!')
 			}, 2000)
 		}
 
@@ -25,8 +26,20 @@ function AuthForm() {
 
 	useEffect(() => {
 		if (isFormReadyToSubmit) {
-			// onSubmit(values)
+			const initialUsers =
+				localStorage.getItem('reactProjectUsers') === null ? [] : users
+			const newUsers = [
+				...initialUsers,
+				{
+					name: values.name,
+					isLogined: true,
+				},
+			]
+			setUsers(newUsers)
 			dispatchForm({ type: 'CLEAR' })
+			if (onSubmit) {
+				onSubmit(newUsers)
+			}
 		}
 	}, [isFormReadyToSubmit])
 
@@ -41,9 +54,7 @@ function AuthForm() {
 
 	const authRequest = (e) => {
 		e.preventDefault()
-		console.log('Вызов из компонента AuthForm')
 		dispatchForm({ type: 'SUBMIT' })
-		console.log('Форма отправляется')
 	}
 
 	return (

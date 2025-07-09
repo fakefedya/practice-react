@@ -1,7 +1,7 @@
 import styles from './Navbar.module.css'
 import cn from 'classnames'
 
-function Navbar({ movieCount }) {
+function Navbar({ userName, movieCount, onLogout }) {
 	const NAVIGATION_LINKS = [
 		{
 			id: 1,
@@ -13,30 +13,45 @@ function Navbar({ movieCount }) {
 			text: 'Мои фильмы',
 			href: '/films',
 		},
+		...(userName
+			? [
+					{
+						id: 3,
+						text: userName,
+						href: '/',
+					},
+			  ]
+			: []),
 		{
-			id: 3,
-			text: 'Войти',
-			href: '/login',
+			id: 4,
+			text: userName ? 'Выход' : 'Войти',
 		},
 	]
 
 	const navItem = NAVIGATION_LINKS.map((link) => (
 		<li className={cn(styles['nav-item'])} key={link.id}>
-			<a className={cn(styles['item-link'])} href={link.href}>
-				{link.id === 2 ? (
-					<>
-						{link.text}
-						<span className={cn(styles['link-badge'])}>{movieCount}</span>
-					</>
-				) : link.id === 3 ? (
-					<>
-						{link.text}
-						<img src='/public/icons/login.svg' alt='Иконка логина' />
-					</>
-				) : (
-					link.text
-				)}
-			</a>
+			{link.id === 4 ? (
+				<button
+					className={cn(styles['item-link'], styles['logout-button'])}
+					onClick={() => (userName && onLogout ? onLogout() : null)}
+				>
+					{link.text}
+					{userName && (
+						<img src='/public/icons/login.svg' alt='Иконка профиля' />
+					)}
+				</button>
+			) : (
+				<a className={cn(styles['item-link'])} href={link.href}>
+					{link.id === 2 ? (
+						<>
+							{link.text}
+							<span className={cn(styles['link-badge'])}>{movieCount}</span>
+						</>
+					) : (
+						link.text
+					)}
+				</a>
+			)}
 		</li>
 	))
 

@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+
 import './App.css'
 import styles from '../src/components/Button/Button.module.css'
 
@@ -63,13 +65,43 @@ function App() {
 		},
 	]
 
-	const handleAuthSubmit = () => {
-		console.log('Вызов из компонента App')
+	const [userName, setUserName] = useState('')
+	const [users, setUsers] = useState([])
+
+	useEffect(() => {
+		const savedUsers = localStorage.getItem('reactProjectUsers')
+		if (savedUsers) {
+			const users = JSON.parse(savedUsers)
+			const latestUser = users[users.length - 1]
+			if (latestUser && latestUser.isLogined) {
+				setUserName(latestUser.name)
+			}
+		}
+	}, [])
+
+	const handleAuthSubmit = (newUsers) => {
+		const latestUser = newUsers[newUsers.length - 1]
+		if (latestUser && latestUser.isLogined) {
+			setUserName(latestUser.name)
+		}
+	}
+
+	const handleLogout = () => {
+		console.log(users)
+		if (userName) {
+			const updatedUsers = users.map((user) =>
+				user.name === userName ? { ...user, isLogined: false } : user
+			)
+			console.log(updatedUsers)
+			setUsers(updatedUsers)
+			localStorage.setItem('reactProjectUsers', JSON.stringify(updatedUsers))
+			setUserName('')
+		}
 	}
 
 	return (
 		<div className='app'>
-			<Header />
+			<Header userName={userName} onLogout={handleLogout} />
 			<Main>
 				<Section>
 					<AuthForm onSubmit={handleAuthSubmit} />
