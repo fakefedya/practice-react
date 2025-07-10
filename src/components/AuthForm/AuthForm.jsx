@@ -3,11 +3,8 @@ import Button from '../Button/Button'
 import Input from '../Input/Input'
 import styles from './AuthForm.module.css'
 import { INITIAL_STATE, formReducer } from './AuthForm.state'
-import { useLocalStorage } from '../../hooks/use-localstorage.hook.js'
 
 function AuthForm({ onSubmit }) {
-	const [users, setUsers] = useLocalStorage('reactProjectUsers')
-
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
 	const { isValid, values, isFormReadyToSubmit } = formState
 	const nameRef = useRef()
@@ -36,20 +33,10 @@ function AuthForm({ onSubmit }) {
 
 	useEffect(() => {
 		if (isFormReadyToSubmit) {
-			const initialUsers =
-				localStorage.getItem('reactProjectUsers') === null ? [] : users
-			const newUsers = [
-				...initialUsers,
-				{
-					name: values.name,
-					isLogined: true,
-				},
-			]
-			setUsers(newUsers)
-			dispatchForm({ type: 'CLEAR' })
 			if (onSubmit) {
 				onSubmit(values.name)
 			}
+			dispatchForm({ type: 'CLEAR' })
 		}
 	}, [isFormReadyToSubmit])
 
