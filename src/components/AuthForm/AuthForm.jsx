@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from 'react'
+import { useEffect, useReducer, useRef } from 'react'
 import Button from '../Button/Button'
 import Input from '../Input/Input'
 import styles from './AuthForm.module.css'
@@ -10,10 +10,20 @@ function AuthForm({ onSubmit }) {
 
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
 	const { isValid, values, isFormReadyToSubmit } = formState
+	const nameRef = useRef()
+
+	const focusError = (isValid) => {
+		switch (true) {
+			case !isValid.name:
+				nameRef.current.focus()
+				break
+		}
+	}
 
 	useEffect(() => {
 		let timerId
 		if (!isValid.name) {
+			focusError(isValid)
 			timerId = setTimeout(() => {
 				dispatchForm({ type: 'RESET_VALIDITY' })
 			}, 2000)
@@ -38,7 +48,7 @@ function AuthForm({ onSubmit }) {
 			setUsers(newUsers)
 			dispatchForm({ type: 'CLEAR' })
 			if (onSubmit) {
-				onSubmit(newUsers)
+				onSubmit(values.name)
 			}
 		}
 	}, [isFormReadyToSubmit])
@@ -65,6 +75,7 @@ function AuthForm({ onSubmit }) {
 					type='text'
 					name='name'
 					value={values.name}
+					ref={nameRef}
 					onChange={onChange}
 					className={styles['auth-input']}
 					placeholder='Ваше имя'

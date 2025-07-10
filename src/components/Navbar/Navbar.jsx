@@ -1,3 +1,4 @@
+import Button from '../Button/Button'
 import styles from './Navbar.module.css'
 import cn from 'classnames'
 
@@ -31,15 +32,16 @@ function Navbar({ userName, movieCount, onLogout }) {
 	const navItem = NAVIGATION_LINKS.map((link) => (
 		<li className={cn(styles['nav-item'])} key={link.id}>
 			{link.id === 4 ? (
-				<button
+				<Button
+					text={link.text}
+					image={
+						userName && (
+							<img src='/public/icons/login.svg' alt='Иконка профиля' />
+						)
+					}
 					className={cn(styles['item-link'], styles['logout-button'])}
 					onClick={() => (userName && onLogout ? onLogout() : null)}
-				>
-					{link.text}
-					{userName && (
-						<img src='/public/icons/login.svg' alt='Иконка профиля' />
-					)}
-				</button>
+				/>
 			) : (
 				<a className={cn(styles['item-link'])} href={link.href}>
 					{link.id === 2 ? (
