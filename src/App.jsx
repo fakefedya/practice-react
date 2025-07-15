@@ -1,4 +1,5 @@
 import { useAuth } from './hooks/use-auth.hook'
+import { UserProvider } from './context/user-context'
 
 import './App.css'
 import styles from '../src/components/Button/Button.module.css'
@@ -65,38 +66,48 @@ function App() {
 		},
 	]
 
-	const { userName, handleLogin, handleLogout } = useAuth()
+	const { userName, handleLogin, handleLogout, users } = useAuth()
+	const activeUser = users.find((user) => user.isLogined)
 
 	return (
-		<div className='app'>
-			<Header userName={userName} onLogout={handleLogout} />
-			<Main>
-				<Section>
-					<AuthForm onSubmit={handleLogin} />
-				</Section>
-				<Section>
-					<Headline>
-						<h1>Поиск</h1>
-						<Paragraph
-							paragraphText={
-								'Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
-							}
-							className={'subheading'}
-						/>
-						<div className='headline__action'>
-							<Input
-								className={'headline-input'}
-								placeholder={'Введите название'}
+		<UserProvider
+			value={{
+				userName,
+				handleLogin,
+				handleLogout,
+				activeUser,
+			}}
+		>
+			<div className='app'>
+				<Header />
+				<Main>
+					<Section>
+						<AuthForm onSubmit={handleLogin} />
+					</Section>
+					<Section>
+						<Headline>
+							<h1>Поиск</h1>
+							<Paragraph
+								paragraphText={
+									'Введите название фильма, сериала или мультфильма для поиска и добавления в избранное.'
+								}
+								className={'subheading'}
 							/>
-							<Button text={'Искать'} className={styles['search-button']} />
-						</div>
-					</Headline>
-				</Section>
-				<Section>
-					<MovieList movieList={MOVIE_LIST} />
-				</Section>
-			</Main>
-		</div>
+							<div className='headline__action'>
+								<Input
+									className={'headline-input'}
+									placeholder={'Введите название'}
+								/>
+								<Button text={'Искать'} className={styles['search-button']} />
+							</div>
+						</Headline>
+					</Section>
+					<Section>
+						<MovieList movieList={MOVIE_LIST} />
+					</Section>
+				</Main>
+			</div>
+		</UserProvider>
 	)
 }
 

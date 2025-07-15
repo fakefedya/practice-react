@@ -25,11 +25,20 @@ function authReducer(state, action) {
 			const trimmedName = action.name.trim()
 			if (!trimmedName) return state
 			const existingUser = state.users.find((user) => user.name === trimmedName)
+			const userId = Date.now().toString()
 			const updatedUsers = existingUser
 				? state.users.map((user) =>
 						user.name === trimmedName ? { ...user, isLogined: true } : user
 				  )
-				: [...state.users, { name: trimmedName, isLogined: true }]
+				: [
+						...state.users,
+						{
+							id: userId,
+							name: trimmedName,
+							isLogined: true,
+							favoriteMovies: [],
+						},
+				  ]
 			localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(updatedUsers))
 			return {
 				users: updatedUsers,
@@ -46,6 +55,10 @@ function authReducer(state, action) {
 				users: updatedUsers,
 				userName: '',
 			}
+		}
+		case 'ADD_FAVORITE_MOVIE': {
+			// Добавляем фильмы в избранное
+			break
 		}
 		default:
 			return state

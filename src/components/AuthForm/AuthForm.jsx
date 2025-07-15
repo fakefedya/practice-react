@@ -3,11 +3,13 @@ import Button from '../Button/Button'
 import Input from '../Input/Input'
 import styles from './AuthForm.module.css'
 import { INITIAL_STATE, formReducer } from './AuthForm.state'
+import { useUser } from '../../hooks/use-user.hook'
 
-function AuthForm({ onSubmit }) {
+function AuthForm() {
 	const [formState, dispatchForm] = useReducer(formReducer, INITIAL_STATE)
 	const { isValid, values, isFormReadyToSubmit } = formState
 	const nameRef = useRef()
+	const { handleLogin } = useUser()
 
 	const focusError = (isValid) => {
 		switch (true) {
@@ -33,12 +35,12 @@ function AuthForm({ onSubmit }) {
 
 	useEffect(() => {
 		if (isFormReadyToSubmit) {
-			if (onSubmit) {
-				onSubmit(values.name)
+			if (handleLogin) {
+				handleLogin(values.name)
 			}
 			dispatchForm({ type: 'CLEAR' })
 		}
-	}, [isFormReadyToSubmit])
+	}, [isFormReadyToSubmit, handleLogin])
 
 	const onChange = (e) => {
 		dispatchForm({
