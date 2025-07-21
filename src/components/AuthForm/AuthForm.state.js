@@ -33,5 +33,8 @@ export function formReducer(state, action) {
 				isFormReadyToSubmit: nameValidity,
 			}
 		}
+
+		default:
+			return { ...state }
 	}
 }

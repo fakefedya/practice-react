@@ -14,11 +14,9 @@ function Navbar() {
 	]
 
 	const navItem = NAVIGATION_LINKS.map((link) => {
-		let linkContent
-
 		switch (link.id) {
 			case 2: {
-				linkContent = (
+				return (
 					<li className={styles['nav-item']} key={link.id}>
 						<a href={link.href} className={styles['item-link']}>
 							{link.text}
@@ -28,23 +26,21 @@ function Navbar() {
 						</a>
 					</li>
 				)
-				break
 			}
 			case 3: {
-				userName
-					? (linkContent = (
-							<li className={styles['nav-item']} key={link.id}>
-								<a href={link.href} className={styles['item-link']}>
-									{userName}
-									<img src='/public/icons/user.svg' alt='Иконка пользователя' />
-								</a>
-							</li>
-					  ))
-					: ''
-				break
+				return userName ? (
+					<li className={styles['nav-item']} key={link.id}>
+						<a href={link.href} className={styles['item-link']}>
+							{userName}
+							<img src='/public/icons/user.svg' alt='Иконка пользователя' />
+						</a>
+					</li>
+				) : (
+					''
+				)
 			}
 			case 4: {
-				linkContent = (
+				return (
 					<li className={styles['nav-item']} key={link.id}>
 						<Button
 							text={link.text}
@@ -58,10 +54,9 @@ function Navbar() {
 						/>
 					</li>
 				)
-				break
 			}
 			default:
-				linkContent = (
+				return (
 					<li className={styles['nav-item']} key={link.id}>
 						<a href={link.href} className={styles['item-link']}>
 							{link.text}
@@ -69,8 +64,6 @@ function Navbar() {
 					</li>
 				)
 		}
-
-		return linkContent
 	})
 
 	return (
