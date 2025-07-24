@@ -1,17 +1,18 @@
-.header__nav-list {
+.nav-list {
 	display: flex;
 	align-items: center;
 	gap: 16px;
 	list-style: none;
+	padding: 0;
 }
 
-.header__nav-item {
+.nav-item {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.header__nav-item-link {
+.item-link {
 	text-decoration: none;
 	display: flex;
 	padding: 12px 16px;
@@ -23,14 +24,16 @@
 	font-weight: 600;
 	line-height: 24px; /* 150% */
 	letter-spacing: 0.32px;
+	background: none;
+	border: none;
 	transition: 0.3s opacity ease-in-out;
 }
 
-.header__nav-item-link:hover {
+.item-link:hover {
 	opacity: 0.8;
 }
 
-.nav__item-link-badge {
+.link-badge {
 	width: 24px;
 	height: 24px;
 	display: flex;

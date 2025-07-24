@@ -1,25 +1,25 @@
-.movie__card {
+.card {
 	padding: 8px 8px 16px 8px;
 	border-radius: 12px;
 	background: rgba(32, 40, 62, 0.8);
 	backdrop-filter: blur(40px);
 }
 
-.movie__card-wrapper {
+.card-wrapper {
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
 }
 
-.movie__card-info {
+.card-info {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
 	padding: 8px;
 }
 
-.movie__card-info-title {
+.info-title {
 	color: var(--Grey-50, #ebeef5);
 	font-size: 16px;
 	font-style: normal;
@@ -29,7 +29,7 @@
 	margin: 0;
 }
 
-.movie__card-rating {
+.card-rating {
 	position: absolute;
 	top: 8px;
 	left: 8px;
@@ -47,7 +47,7 @@
 	line-height: 24px; /* 150% */
 }
 
-.movie__card-rating-icon {
+.rating-icon {
 	display: flex;
 	width: 16px;
 	height: 16px;

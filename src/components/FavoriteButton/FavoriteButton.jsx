@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import './FavoriteButton.css'
+import styles from './FavoriteButton.module.css'
+import cn from 'classnames'
 
 function FavoriteButton() {
 	const [isFavorite, setIsFavorite] = useState(false)
@@ -7,9 +8,6 @@ function FavoriteButton() {
 	const buttonStatus = {
 		icon: isFavorite ? '/icons/bookmark.svg' : '/icons/favorite.svg',
 		text: isFavorite ? 'В избранном' : 'В избранное',
-		className: `favorite__button${
-			isFavorite ? ' favorite__button--active' : ''
-		}`,
 	}
 
 	const handleClick = () => {
@@ -17,11 +15,16 @@ function FavoriteButton() {
 	}
 
 	return (
-		<button className={buttonStatus.className} onClick={handleClick}>
+		<button
+			className={cn(styles['favorite-button'], {
+				[styles.active]: isFavorite,
+			})}
+			onClick={handleClick}
+		>
 			<img
 				src={buttonStatus.icon}
 				alt='Иконка избранного'
-				className='favorite__button-icon'
+				className={styles.icon}
 			/>
 			{buttonStatus.text}
 		</button>

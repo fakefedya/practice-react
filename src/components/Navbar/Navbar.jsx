@@ -1,51 +1,74 @@
-import './Navbar.css'
+import Button from '../Button/Button'
+import styles from './Navbar.module.css'
+import cn from 'classnames'
+import { useUser } from '../../hooks/use-user.hook'
 
-function Navbar({ movieCount }) {
+function Navbar() {
+	const { userName, handleLogout, activeUser } = useUser()
+
 	const NAVIGATION_LINKS = [
-		{
-			id: 1,
-			text: 'Поиск фильмов',
-			href: '/search',
-		},
-		{
-			id: 2,
-			text: 'Мои фильмы',
-			href: '/films',
-		},
-		{
-			id: 3,
-			text: 'Войти',
-			href: '/login',
-		},
+		{ id: 1, text: 'Поиск фильмов', href: '/search' },
+		{ id: 2, text: 'Мои фильмы', href: '/films' },
+		...(userName ? [{ id: 3, text: userName, href: '/' }] : []),
+		{ id: 4, text: userName ? 'Выход' : 'Войти' },
 	]
 
-	const navItem = NAVIGATION_LINKS.map((link) => (
-		<li className='header__nav-item' key={link.id}>
-			<a className='header__nav-item-link' href={link.href}>
-				{link.id === 2 ? (
-					<>
-						{link.text}
-						<span className='nav__item-link-badge'>{movieCount}</span>
-					</>
-				) : link.id === 3 ? (
-					<>
-						{link.text}
-						<img
-							className='nav__item-link-image'
-							src='/public/icons/login.svg'
-							alt='Иконка логина'
-						/>
-					</>
+	const navItem = NAVIGATION_LINKS.map((link) => {
+		switch (link.id) {
+			case 2: {
+				return (
+					<li className={styles['nav-item']} key={link.id}>
+						<a href={link.href} className={styles['item-link']}>
+							{link.text}
+							<span className={styles['link-badge']}>
+								{activeUser?.favoriteMovies?.length || 0}
+							</span>
+						</a>
+					</li>
+				)
+			}
+			case 3: {
+				return userName ? (
+					<li className={styles['nav-item']} key={link.id}>
+						<a href={link.href} className={styles['item-link']}>
+							{userName}
+							<img src='/public/icons/user.svg' alt='Иконка пользователя' />
+						</a>
+					</li>
 				) : (
-					link.text
-				)}
-			</a>
-		</li>
-	))
+					''
+				)
+			}
+			case 4: {
+				return (
+					<li className={styles['nav-item']} key={link.id}>
+						<Button
+							text={link.text}
+							image={
+								!userName && (
+									<img src='/public/icons/login.svg' alt='Иконка профиля' />
+								)
+							}
+							className={cn(styles['item-link'], styles['logout-button'])}
+							onClick={() => (userName && handleLogout ? handleLogout() : null)}
+						/>
+					</li>
+				)
+			}
+			default:
+				return (
+					<li className={styles['nav-item']} key={link.id}>
+						<a href={link.href} className={styles['item-link']}>
+							{link.text}
+						</a>
+					</li>
+				)
+		}
+	})
 
 	return (
-		<nav className='header__nav'>
-			<ul className='header__nav-list'>{navItem}</ul>
+		<nav>
+			<ul className={cn(styles['nav-list'])}>{navItem}</ul>
 		</nav>
 	)
 }

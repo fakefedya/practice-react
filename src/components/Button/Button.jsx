@@ -1,21 +1,11 @@
-import { useState } from 'react'
-import './Button.css'
+import styles from './Button.module.css'
+import cn from 'classnames'
 
-function Button({ buttonText, className }) {
-	const [isActive, setIsActive] = useState(false)
-
-	const buttonClassName = `button${className ? ' ' + className : ''}${
-		isActive ? ' button--active' : ''
-	}`
-
-	const handleClick = () => {
-		setIsActive((prev) => !prev)
-		console.log(`Стейт кнопки изменился: ${isActive}`)
-	}
-
+function Button({ text, className, image, ...props }) {
 	return (
-		<button className={buttonClassName} onClick={handleClick}>
-			{buttonText}
+		<button {...props} className={cn(className, styles['button'])}>
+			{text}
+			{image}
 		</button>
 	)
 }

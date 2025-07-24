@@ -1,27 +1,24 @@
-.favorite__button {
+.favorite-button {
 	display: flex;
 	align-items: center;
 	gap: 8px;
 	background: transparent;
 	border: none;
 	cursor: pointer;
-
 	color: var(--Primary-400, #7b6ef6);
-
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 600;
-	line-height: 24px; /* 150% */
+	line-height: 24px;
 	letter-spacing: 0.32px;
-
 	transition: 0.3s opacity ease-in-out;
 }
 
-.favorite__button--active {
-	color: var(--Success-400, #37d8a7);
+.favorite-button.active {
+	color: #37d8a7;
 }
 
-.favorite__button-icon {
+.icon {
 	display: flex;
 	width: 24px;
 	height: 24px;
